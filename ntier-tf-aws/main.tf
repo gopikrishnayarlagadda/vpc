@@ -1,17 +1,5 @@
-provider "aws" {
-  region = var.region
-}
-variable "region" {
-  type        = string
-  default     = "us-west-2"
-  description = "region in which ntier has to be created"
-}
-
 # we need to create a vpc resource
-variable "vpccidr" {
-  type = string
-  default ="192.168.0.0/16"
-}
+
 resource "aws_vpc" "ntiervpc" {
     cidr_block = var.vpccidr
     enable_dns_support = true
