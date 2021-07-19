@@ -1,6 +1,12 @@
 provider "aws" {
-  region = "us-west-2"
+  region = var.region
 }
+variable "region" {
+  type        = string
+  default     = "us-west-2"
+  description = "region in which ntier has to be created"
+}
+
 # we need to create a vpc resource
 resource "aws_vpc" "ntiervpc" {
     cidr_block = "192.168.0.0/16"
@@ -22,6 +28,7 @@ resource "aws_subnet" "web1" {
       "Name" = "web1"
     }
 }
+# Lets create a subnet web2
 # Lets create a subnet web2
 resource "aws_subnet" "web2" {
   vpc_id = aws_vpc.ntiervpc.id
