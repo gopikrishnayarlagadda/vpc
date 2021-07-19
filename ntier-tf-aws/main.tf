@@ -8,8 +8,12 @@ variable "region" {
 }
 
 # we need to create a vpc resource
+variable "vpccidr" {
+  type = string
+  default ="192.168.0.0/16"
+}
 resource "aws_vpc" "ntiervpc" {
-    cidr_block = "192.168.0.0/16"
+    cidr_block = var.vpccidr
     enable_dns_support = true
     enable_dns_hostnames = true
 
@@ -28,7 +32,6 @@ resource "aws_subnet" "web1" {
       "Name" = "web1"
     }
 }
-# Lets create a subnet web2
 # Lets create a subnet web2
 resource "aws_subnet" "web2" {
   vpc_id = aws_vpc.ntiervpc.id
